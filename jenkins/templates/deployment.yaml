@@ -1,0 +1,139 @@
+---
+apiVersion: v1
+kind: List
+items:
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    name: {{ template "fullname" . }}
+    annotations:
+      configmap.fabric8.io/update-on-change: jenkins
+      fabric8.io/target-platform: kubernetes
+      fabric8.io/git-commit: 0f449469a780cab67c0ebba0d725ce060dc61c17
+      fabric8.io/metrics-path: dashboard/file/kubernetes-pods.json/?var-project=jenkins&var-version=4.0.27
+      fabric8.io/scm-con-url: scm:git:git@github.com:fabric8-services/tenant-jenkins.git/tenant-jenkins-apps/jenkins
+      fabric8.io/scm-url: http://github.com/fabric8-services/tenant-jenkins/tenant-jenkins-apps/jenkins
+      fabric8.io/iconUrl: https://cdn.rawgit.com/fabric8-services/tenant-jenkins/tenant-jenkins-apps/jenkins/master/apps/jenkins/src/main/fabric8/icon.svg
+      fabric8.io/git-branch: release-v4.0.27
+      fabric8.io/scm-devcon-url: scm:git:git@github.com:fabric8-services/tenant-jenkins.git/tenant-jenkins-apps/jenkins
+      fabric8.io/scm-tag: fabric8-services/tenant-jenkins-1.0.0
+    labels:
+      app: {{ template "fullname" . }}
+      chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+      release: "{{ .Release.Name }}"
+      heritage: "{{ .Release.Service }}"
+      provider: fabric8
+      version: 4.0.27
+      group: io.fabric8.tenant.apps
+    name: jenkins
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 2
+    selector:
+      matchLabels:
+        app: {{ template "fullname" . }}
+        provider: fabric8
+        group: io.fabric8.tenant.apps
+    template:
+      metadata:
+        annotations:
+          fabric8.io/git-commit: 0f449469a780cab67c0ebba0d725ce060dc61c17
+          fabric8.io/metrics-path: dashboard/file/kubernetes-pods.json/?var-project=jenkins&var-version=4.0.27
+          fabric8.io/scm-con-url: scm:git:git@github.com:fabric8-services/tenant-jenkins.git/tenant-jenkins-apps/jenkins
+          pod.alpha.kubernetes.io/init-containers: '[{"image":"busybox","imagePullPolicy":"IfNotPresent","name":"fmp-volume-permission","command":["chmod","777","/var/jenkins_home"],"volumeMounts":[{"mountPath":"/var/jenkins_home","name":"jenkins-home"}]}]'
+          fabric8.io/scm-url: http://github.com/fabric8-services/tenant-jenkins/tenant-jenkins-apps/jenkins
+          fabric8.io/iconUrl: https://cdn.rawgit.com/fabric8-services/tenant-jenkins/tenant-jenkins-apps/jenkins/master/apps/jenkins/src/main/fabric8/icon.svg
+          configmap.fabric8.io/update-on-change: jenkins
+          fabric8.io/target-platform: kubernetes
+          fabric8.io/git-branch: release-v4.0.27
+          fabric8.io/scm-devcon-url: scm:git:git@github.com:fabric8-services/tenant-jenkins.git/tenant-jenkins-apps/jenkins
+          fabric8.io/scm-tag: fabric8-services/tenant-jenkins-1.0.0
+        labels:
+          app: {{ template "fullname" . }}
+          provider: fabric8
+          version: 4.0.27
+          group: io.fabric8.tenant.apps
+      spec:
+        containers:
+        - env:
+          - name: PROJECT_NAMESPACE
+            value: ${PROJECT_NAMESPACE}
+          - name: KUBERNETES_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: KUBERNETES_TRUST_CERTIFICATES
+            value: "true"
+          - name: KUBERNETES_MASTER
+            value: https://kubernetes.default:443
+          - name: MAX_METASPACE_SIZE
+            value: 200m
+          - name: KEYCLOAK_URL
+            valueFrom:
+              configMapKeyRef:
+                key: keycloak.url
+                name: jenkins
+          - name: KEYCLOAK_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                key: client.secret
+                name: jenkins
+          - name: JENKINS_OPTS
+            value: -Dgroovy.use.classvalue=true
+          - name: JAVA_HOME
+            value: /etc/alternatives/java_sdk
+          - name: MAVEN_OPTS
+            value: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+          - name: RECOMMENDER_API_TOKEN
+            valueFrom:
+              secretKeyRef:
+                key: token
+                name: jenkins-recommender-api-token
+          image: stakater/jenkins-kubernetes:2.95
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                - sh
+                - /var/lib/jenkins/pre-shutdown.sh
+          livenessProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /login
+              port: 8080
+            initialDelaySeconds: 420
+            timeoutSeconds: 10
+          name: {{ .Chart.Name }}
+          ports:
+          - containerPort: 50000
+            name: slave
+          - containerPort: 8080
+            name: http
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: 8080
+            initialDelaySeconds: 60
+            timeoutSeconds: 10
+          resources:
+            limits:
+              memory: 2Gi
+              cpu: "1"
+            requests:
+              memory: 1Gi
+              cpu: "1"
+          volumeMounts:
+          - mountPath: /var/jenkins_home
+            name: jenkins-home
+            readOnly: false
+          - mountPath: /usr/local/bin/configuration/
+            name: jenkins-config
+        serviceAccountName: jenkins
+        volumes:
+        - name: jenkins-home
+          persistentVolumeClaim:
+            claimName: jenkins-home
+        - configMap:
+            name: jenkins
+          name: jenkins-config
