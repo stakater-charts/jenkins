@@ -89,8 +89,8 @@ items:
               secretKeyRef:
                 key: token
                 name: jenkins-recommender-api-token
-          image: "{{ .Values.jenkinsImage.name }}:{{ .Values.jenkinsImage.tag }}"
-          imagePullPolicy: {{ .Values.jenkinsImage.pullPolicy }}
+          image: "{{ .Values.jenkins.image.name }}:{{ .Values.jenkins.image.tag }}"
+          imagePullPolicy: {{ .Values.jenkins.image.pullPolicy }}
           lifecycle:
             preStop:
               exec:
