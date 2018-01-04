@@ -9,7 +9,7 @@ spec:
     - ReadWriteOnce
   nfs:
     # Create this first!
-    server: fs-ae2c9f07.efs.us-west-2.amazonaws.com
+    server: {{ .Values.efsServer }}
     path: "/jenkins-workspace"
 ---
 apiVersion: v1
@@ -23,5 +23,5 @@ spec:
     - ReadWriteMany
   nfs:
     # Create this first!
-    server: fs-ae2c9f07.efs.us-west-2.amazonaws.com
+    server: {{ .Values.efsServer }}
     path: "/jenkins-mvn-local-repo"
