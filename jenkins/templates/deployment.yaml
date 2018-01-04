@@ -21,7 +21,7 @@ items:
       app: {{ template "fullname" . }}
       chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
       release: "{{ .Release.Name }}"
-      heritage: "{{ .Release.Service }}"
+      heritage: {{ .Release.Service | quote }}
       provider: fabric8
       version: 4.0.27
       group: io.fabric8.tenant.apps

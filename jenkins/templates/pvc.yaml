@@ -7,6 +7,7 @@ items:
   metadata:
     labels:
       app: {{ template "fullname" . }}
+      heritage: {{ .Release.Service | quote }}
       provider: fabric8
       version: 4.0.27
       group: io.fabric8.tenant.apps
@@ -23,6 +24,7 @@ items:
   metadata:
     labels:
       app: {{ template "fullname" . }}
+      heritage: {{ .Release.Service | quote }}
       provider: fabric8
       version: 4.0.27
       group: io.fabric8.tenant.apps
