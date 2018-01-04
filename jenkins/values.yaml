@@ -1,1 +1,5 @@
 namespace: default
+jenkinsImage:
+  name: stakater/jenkins-kubernetes
+  tag: 2.95
+  pullPolicy: IfNotPresent

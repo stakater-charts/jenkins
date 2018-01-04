@@ -89,8 +89,8 @@ items:
               secretKeyRef:
                 key: token
                 name: jenkins-recommender-api-token
-          image: stakater/jenkins-kubernetes:2.95
-          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.jenkinsImage.name }}:{{ .Values.jenkinsImage.tag }}"
+          imagePullPolicy: {{ .Values.jenkinsImage.pullPolicy }}
           lifecycle:
             preStop:
               exec:
