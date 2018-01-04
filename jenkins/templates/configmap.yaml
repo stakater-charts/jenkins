@@ -11,6 +11,7 @@ items:
       version: 1.0.8
       app: {{ template "fullname" . }}
       heritage: {{ .Release.Service | quote }}
+      release: {{ .Release.Name | quote }}
       group: io.fabric8.jenkins.packages
     name: {{ template "fullname" . }}
   data:
@@ -24,6 +25,7 @@ items:
     labels:
       app: {{ template "fullname" . }}
       heritage: {{ .Release.Service | quote }}
+      release: {{ .Release.Name | quote }}
       provider: fabric8
       version: 1.0.8
       group: io.fabric8.jenkins.packages
@@ -44,6 +46,7 @@ items:
       version: 1.0.8
       app: {{ template "fullname" . }}
       heritage: {{ .Release.Service | quote }}
+      release: {{ .Release.Name | quote }}
       group: io.fabric8.jenkins.packages
     name: fabric8-system
   data:
@@ -58,6 +61,7 @@ items:
     labels:
       app: {{ template "fullname" . }}
       heritage: {{ .Release.Service | quote }}
+      release: {{ .Release.Name | quote }}
       provider: fabric8
       version: 4.0.27
       group: io.fabric8.tenant.apps
