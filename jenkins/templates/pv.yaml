@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: jenkins-workspace-efs-pv-test
+  name: jenkins-workspace-efs-pv
 spec:
   capacity:
     storage: 100Gi
@@ -10,12 +10,12 @@ spec:
   nfs:
     # Create this first!
     server: fs-ae2c9f07.efs.us-west-2.amazonaws.com
-    path: "/jenkins-workspace-test"
+    path: "/jenkins-workspace"
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: jenkins-mvn-local-repo-efs-pv-test
+  name: jenkins-mvn-local-repo-efs-pv
 spec:
   capacity:
     storage: 100Gi
@@ -24,4 +24,4 @@ spec:
   nfs:
     # Create this first!
     server: fs-ae2c9f07.efs.us-west-2.amazonaws.com
-    path: "/jenkins-mvn-local-repo-test"
+    path: "/jenkins-mvn-local-repo"

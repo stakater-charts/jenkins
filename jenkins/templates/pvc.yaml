@@ -17,7 +17,7 @@ items:
     resources:
       requests:
         storage: 100Gi
-    volumeName: jenkins-workspace-efs-pv-test
+    volumeName: jenkins-workspace-efs-pv
 - apiVersion: v1
   kind: PersistentVolumeClaim
   metadata:
@@ -33,4 +33,4 @@ items:
     resources:
       requests:
         storage: 100Gi
-    volumeName: jenkins-mvn-local-repo-efs-pv-test
+    volumeName: jenkins-mvn-local-repo-efs-pv
