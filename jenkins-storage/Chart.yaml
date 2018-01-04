@@ -1,0 +1,13 @@
+apiVersion: v1
+name: jenkins-storage
+description: Chart that deploys PV and PVC for use with Jenkins chart 
+version: 1.0.0
+keywords:
+  - jenkins
+  - pvc
+  - pv
+  - kubernetes
+home: https://github.com/stakater/chart-jenkins
+maintainers:
+- name: Stakater
+  email: stakater@aurorasolutions.io
