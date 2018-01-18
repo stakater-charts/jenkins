@@ -17,3 +17,5 @@ jenkins:
       secring: ""
     ssh:
       config: ""
+    docker:
+      config: ""
