@@ -9,7 +9,7 @@ metadata:
     version: 4.0.27
     group: io.fabric8.tenant.apps
   name: jenkins
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Values.jenkins.namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
@@ -22,4 +22,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: {{ template "fullname" . }}
-    namespace: {{ .Values.namespace }}
+    namespace: {{ .Values.jenkins.namespace }}

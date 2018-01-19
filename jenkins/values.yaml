@@ -1,5 +1,8 @@
-namespace: default
+kubernetes:
+  host: https://kubernetes.default:443
+
 jenkins:
+  namespace: default
   image:
     name: stakater/jenkins-kubernetes
     tag: 2.95
@@ -19,3 +22,5 @@ jenkins:
       config: ""
     docker:
       config: ""
+  service:
+    ingressClass: internal-ingress

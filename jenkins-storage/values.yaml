@@ -1,3 +1,4 @@
-namespace: default
-efs:
-  server: fs-ae2c9f07.efs.us-west-2.amazonaws.com
+jenkinsStorage:
+  namespace: default
+  efs:
+    server: fs-ae2c9f07.efs.us-west-2.amazonaws.com
