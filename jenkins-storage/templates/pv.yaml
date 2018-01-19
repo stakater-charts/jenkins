@@ -9,7 +9,7 @@ spec:
     - ReadWriteOnce
   nfs:
     # Create this first!
-    server: {{ .Values.efs.server }}
+    server: {{ .Values.jenkinsStorage.efs.server }}
     path: "/jenkins-workspace"
 ---
 apiVersion: v1
@@ -23,5 +23,5 @@ spec:
     - ReadWriteMany
   nfs:
     # Create this first!
-    server: {{ .Values.efs.server }}
+    server: {{ .Values.jenkinsStorage.efs.server }}
     path: "/jenkins-mvn-local-repo"

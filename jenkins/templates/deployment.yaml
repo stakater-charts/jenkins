@@ -9,14 +9,6 @@ items:
     annotations:
       configmap.fabric8.io/update-on-change: jenkins
       fabric8.io/target-platform: kubernetes
-      fabric8.io/git-commit: 0f449469a780cab67c0ebba0d725ce060dc61c17
-      fabric8.io/metrics-path: dashboard/file/kubernetes-pods.json/?var-project=jenkins&var-version=4.0.27
-      fabric8.io/scm-con-url: scm:git:git@github.com:fabric8-services/tenant-jenkins.git/tenant-jenkins-apps/jenkins
-      fabric8.io/scm-url: http://github.com/fabric8-services/tenant-jenkins/tenant-jenkins-apps/jenkins
-      fabric8.io/iconUrl: https://cdn.rawgit.com/fabric8-services/tenant-jenkins/tenant-jenkins-apps/jenkins/master/apps/jenkins/src/main/fabric8/icon.svg
-      fabric8.io/git-branch: release-v4.0.27
-      fabric8.io/scm-devcon-url: scm:git:git@github.com:fabric8-services/tenant-jenkins.git/tenant-jenkins-apps/jenkins
-      fabric8.io/scm-tag: fabric8-services/tenant-jenkins-1.0.0
     labels:
       app: {{ template "fullname" . }}
       chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
@@ -37,17 +29,9 @@ items:
     template:
       metadata:
         annotations:
-          fabric8.io/git-commit: 0f449469a780cab67c0ebba0d725ce060dc61c17
-          fabric8.io/metrics-path: dashboard/file/kubernetes-pods.json/?var-project=jenkins&var-version=4.0.27
-          fabric8.io/scm-con-url: scm:git:git@github.com:fabric8-services/tenant-jenkins.git/tenant-jenkins-apps/jenkins
           pod.alpha.kubernetes.io/init-containers: '[{"image":"busybox","imagePullPolicy":"IfNotPresent","name":"fmp-volume-permission","command":["chmod","777","/var/jenkins_home"],"volumeMounts":[{"mountPath":"/var/jenkins_home","name":"jenkins-home"}]}]'
-          fabric8.io/scm-url: http://github.com/fabric8-services/tenant-jenkins/tenant-jenkins-apps/jenkins
-          fabric8.io/iconUrl: https://cdn.rawgit.com/fabric8-services/tenant-jenkins/tenant-jenkins-apps/jenkins/master/apps/jenkins/src/main/fabric8/icon.svg
           configmap.fabric8.io/update-on-change: jenkins
           fabric8.io/target-platform: kubernetes
-          fabric8.io/git-branch: release-v4.0.27
-          fabric8.io/scm-devcon-url: scm:git:git@github.com:fabric8-services/tenant-jenkins.git/tenant-jenkins-apps/jenkins
-          fabric8.io/scm-tag: fabric8-services/tenant-jenkins-1.0.0
         labels:
           app: {{ template "fullname" . }}
           provider: fabric8
@@ -65,7 +49,7 @@ items:
           - name: KUBERNETES_TRUST_CERTIFICATES
             value: "true"
           - name: KUBERNETES_MASTER
-            value: https://kubernetes.default:443
+            value: {{ .Values.kubernetes.host }}
           - name: MAX_METASPACE_SIZE
             value: 200m
           - name: KEYCLOAK_URL
