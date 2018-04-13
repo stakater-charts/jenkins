@@ -11,7 +11,7 @@ items:
 # TODO: Used in fabric8-pipeline-library
     name: fabric8-pipelines
   data:
-    external-docker-registry-url: {{ .Values.jenkins.config.externalDockerRegistryURL | quote }}
+    external-docker-registry-url: {{ .Values.jenkins.externalDockerRegistryURL | quote }}
     disable-itests-cd: "false"
     disable-itests-ci: "false"
     ci-branch-patterns: '- PR-.*'
