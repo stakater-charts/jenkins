@@ -7,6 +7,7 @@ jenkins:
     provider: stakater
     version: 2.95
   namespace: default
+  externalDockerRegistryURL: ""
   image:
     name: stakater/jenkins-kubernetes
     tag: 2.95
@@ -32,7 +33,7 @@ jenkins:
       externalConfig: ""
       currentConfig: ""
     ingressMonitorController:
-      config: ""
+      testConfig: ""
     chartmuseum:
       username: ""
       password: ""
