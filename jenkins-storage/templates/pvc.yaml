@@ -6,12 +6,8 @@ items:
   kind: PersistentVolumeClaim
   metadata:
     labels:
-      app: {{ template "fullname" . }}
-      heritage: {{ .Release.Service | quote }}
-      release: {{ .Release.Name | quote }}
-      provider: fabric8
-      version: 4.0.27
-      group: io.fabric8.tenant.apps
+{{ include "labels.stakater" . | indent 6 }}
+{{ include "labels.chart" . | indent 6 }}
     name: jenkins-home
   spec:
     accessModes:
@@ -24,17 +20,13 @@ items:
   kind: PersistentVolumeClaim
   metadata:
     labels:
-      app: {{ template "fullname" . }}
-      heritage: {{ .Release.Service | quote }}
-      release: {{ .Release.Name | quote }}
-      provider: fabric8
-      version: 4.0.27
-      group: io.fabric8.tenant.apps
+{{ include "labels.stakater" . | indent 6 }}
+{{ include "labels.chart" . | indent 6 }}
     name: jenkins-mvn-local-repo
   spec:
     accessModes:
     - ReadWriteOnce
     resources:
       requests:
-        storage: 100Gi
+        storage: 10Gi
     volumeName: jenkins-mvn-local-repo-efs-pv
