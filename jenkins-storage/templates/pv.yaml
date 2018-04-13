@@ -18,7 +18,7 @@ metadata:
   name: jenkins-mvn-local-repo-efs-pv
 spec:
   capacity:
-    storage: 100Gi
+    storage: 10Gi
   accessModes:
     - ReadWriteMany
   nfs:

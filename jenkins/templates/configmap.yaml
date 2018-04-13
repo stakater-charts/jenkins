@@ -6,32 +6,12 @@ items:
   kind: ConfigMap
   metadata:
     labels:
-      fabric8.io/kind: package
-      provider: fabric8.io
-      version: 1.0.8
-      app: {{ template "fullname" . }}
-      heritage: {{ .Release.Service | quote }}
-      release: {{ .Release.Name | quote }}
-      group: io.fabric8.jenkins.packages
-    name: {{ template "fullname" . }}
-  data:
-    metadata-url: http://central.maven.org/maven2/io/fabric8/jenkins/packages/fabric8-jenkins-github/maven-metadata.xml
-    package-url-prefix: http://central.maven.org/maven2/io/fabric8/jenkins/packages/fabric8-jenkins-github/%[1]s/fabric8-jenkins-github-%[1]s-
-- apiVersion: v1
-  kind: ConfigMap
-  metadata:
-    annotations:
-      fabric8.io/target-platform: kubernetes
-    labels:
-      app: {{ template "fullname" . }}
-      heritage: {{ .Release.Service | quote }}
-      release: {{ .Release.Name | quote }}
-      provider: fabric8
-      version: 1.0.8
-      group: io.fabric8.jenkins.packages
+{{ include "labels.stakater" . | indent 6 }}
+{{ include "labels.chart" . | indent 6 }}
+# TODO: Used in fabric8-pipeline-library
     name: fabric8-pipelines
   data:
-    external-docker-registry-url: ""
+    external-docker-registry-url: {{ .Values.jenkins.config.externalDockerRegistryURL | quote }}
     disable-itests-cd: "false"
     disable-itests-ci: "false"
     ci-branch-patterns: '- PR-.*'
@@ -40,32 +20,12 @@ items:
 - apiVersion: v1
   kind: ConfigMap
   metadata:
-    labels:
-      fabric8.io/kind: package
-      provider: fabric8.io
-      version: 1.0.8
-      app: {{ template "fullname" . }}
-      heritage: {{ .Release.Service | quote }}
-      release: {{ .Release.Name | quote }}
-      group: io.fabric8.jenkins.packages
-    name: fabric8-system
-  data:
-    metadata-url: http://central.maven.org/maven2/io/fabric8/platform/packages/fabric8-system/maven-metadata.xml
-    package-url-prefix: http://central.maven.org/maven2/io/fabric8/platform/packages/fabric8-system/%[1]s/fabric8-system-%[1]s-
-- apiVersion: v1
-  kind: ConfigMap
-  metadata:
     annotations:
       expose.service-key.config.fabric8.io/keycloak: keycloak.url
-      fabric8.io/target-platform: kubernetes
     labels:
-      app: {{ template "fullname" . }}
-      heritage: {{ .Release.Service | quote }}
-      release: {{ .Release.Name | quote }}
-      provider: fabric8
-      version: 4.0.27
-      group: io.fabric8.tenant.apps
-    name: jenkins
+{{ include "labels.stakater" . | indent 6 }}
+{{ include "labels.chart" . | indent 6 }}
+    name: {{ template "name" . }}
   data:
     keycloak.url: ${KEYCLOAK_URL}
     org.jenkinsci.plugins.updatebot.GlobalPluginConfiguration.xml: |-
@@ -151,7 +111,18 @@ items:
         <approvedScriptHashes>
         </approvedScriptHashes>
         <approvedSignatures>
+          <string>method hudson.tasks.test.AbstractTestResultAction getFailCount</string>
+          <string>method hudson.tasks.test.AbstractTestResultAction getSkipCount</string>
+          <string>method hudson.tasks.test.AbstractTestResultAction getTotalCount</string>
+          <string>method java.lang.CharSequence subSequence int int</string>
           <string>field hudson.plugins.git.GitSCM GIT_BRANCH</string>
+          <string>method hudson.plugins.git.GitSCM getUserRemoteConfigs</string>
+          <string>method hudson.plugins.git.UserRemoteConfig getUrl</string>
+          <string>method hudson.plugins.git.UserRemoteConfig getRefspec</string>
+          <string>method hudson.plugins.git.UserRemoteConfig getName</string>
+          <string>staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods first java.util.List</string>
+          <string>method java.net.URL getHost</string>
+          <string>method java.net.URL getPath</string>
           <string>field hudson.plugins.git.GitSCMBackwardCompatibility branch</string>
           <string>field hudson.plugins.git.GitSCMBackwardCompatibility source</string>
           <string>method groovy.json.JsonBuilder toPrettyString</string>
