@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-@Library('github.com/stakater/fabric8-pipeline-library@versioned-charts')
+@Library('github.com/stakater/fabric8-pipeline-library@master')
 
 def dummy = ""
 
