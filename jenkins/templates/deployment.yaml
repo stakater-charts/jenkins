@@ -59,11 +59,11 @@ items:
                 key: external-docker-registry-url
                 name: fabric8-pipelines
           - name: JENKINS_OPTS
-            value: -Dgroovy.use.classvalue=true
+            value: "-Dgroovy.use.classvalue=true"
           - name: JAVA_HOME
-            value: /etc/alternatives/java_sdk
+            value: "/etc/alternatives/java_sdk"
           - name: MAVEN_OPTS
-            value: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+            value: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
           - name: RECOMMENDER_API_TOKEN
             valueFrom:
               secretKeyRef:

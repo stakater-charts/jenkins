@@ -23,7 +23,7 @@ provider: {{ .Values.jenkinsStorage.labels.provider }}
 
 {{- define "labels.stakater" -}}
 {{ template "labels.selector" . }}
-version: {{ .Values.jenkinsStorage.labels.version }}
+version: "{{ .Values.jenkinsStorage.labels.version }}"
 {{- end -}}
 
 {{- define "labels.chart" -}}
