@@ -40,5 +40,7 @@ jenkins:
     slack:
       channel: ""
       webHookURL: ""
+    stk:
+      issuesAuth: ""
   service:
     ingressClass: internal-ingress
