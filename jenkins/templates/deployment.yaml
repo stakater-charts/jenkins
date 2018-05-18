@@ -116,6 +116,7 @@ items:
             claimName: {{ .Values.jenkins.persistence.volumeClaimName }}
         {{- else }}
           emptyDir: {}
+        {{- end }}
         - configMap:
             name: {{ template "name" . }}
           name: jenkins-config
