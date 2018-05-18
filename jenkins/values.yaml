@@ -44,3 +44,6 @@ jenkins:
       issuesAuth: ""
   service:
     ingressClass: internal-ingress
+  persistence:
+    enabled: true
+    volumeClaimName: jenkins-home
