@@ -111,8 +111,12 @@ items:
         serviceAccount: {{ template "name" . }}
         volumes:
         - name: jenkins-home
+        {{- if .Values.jenkins.persistence.enabled }}
           persistentVolumeClaim:
-            claimName: jenkins-home
+            claimName: {{ .Values.jenkins.persistence.volumeClaimName }}
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
         - configMap:
             name: {{ template "name" . }}
           name: jenkins-config
