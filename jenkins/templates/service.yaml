@@ -28,7 +28,7 @@ items:
     labels:
 {{ include "labels.stakater" . | indent 6 }}
 {{ include "labels.chart" . | indent 6 }}
-      expose: "true"
+      expose: "{{ .Values.jenkins.service.expose }}"
     name: {{ template "name" . }}
   spec:
     ports:
