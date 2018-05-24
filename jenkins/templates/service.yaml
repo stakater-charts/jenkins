@@ -28,6 +28,7 @@ items:
     labels:
 {{ include "labels.stakater" . | indent 6 }}
 {{ include "labels.chart" . | indent 6 }}
+      expose: "true"
     name: {{ template "name" . }}
   spec:
     ports:
