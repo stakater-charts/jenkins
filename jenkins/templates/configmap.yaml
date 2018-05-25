@@ -344,13 +344,9 @@ items:
         <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy">
           <denyAnonymousReadAccess>true</denyAnonymousReadAccess>
         </authorizationStrategy>
-{{- else }}
-        <authorizationStrategy class="hudson.security.AuthorizationStrategy$Unsecured"/>
 {{- end }}
 {{- if .Values.jenkins.security.enabled }}
 {{ .Values.jenkins.security.realm | indent 8 }}
-{{- else }}
-        <securityRealm class="hudson.security.SecurityRealm$None"/>
 {{- end }}
         <disableRememberMe>false</disableRememberMe>
         <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
