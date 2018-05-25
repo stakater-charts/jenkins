@@ -12,6 +12,17 @@ jenkins:
     name: stakater/jenkins-kubernetes
     tag: 2.95
     pullPolicy: IfNotPresent
+  security:
+    enabled: true
+    realm: |-
+        <securityRealm class="org.jenkinsci.plugins.oic.OicSecurityRealm" plugin="oic-auth@1.0">
+          <clientId>fabric8-online-platform</clientId>
+          <clientSecret>${KEYCLOAK_CLIENT_SECRET}</clientSecret>
+          <tokenServerUrl>${KEYCLOAK_URL}/auth/realms/fabric8/protocol/openid-connect/token</tokenServerUrl>
+          <authorizationServerUrl>${KEYCLOAK_URL}/auth/realms/fabric8/protocol/openid-connect/auth</authorizationServerUrl>
+          <userNameField>email</userNameField>
+          <scopes>openid email</scopes>
+        </securityRealm>
   secrets:
     git:
       sshKey: ""

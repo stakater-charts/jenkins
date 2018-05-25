@@ -339,18 +339,19 @@ items:
         <version>1.619</version>
         <numExecutors>5</numExecutors>
         <mode>NORMAL</mode>
-        <useSecurity>true</useSecurity>
+        <useSecurity>{{ .Values.jenkins.security.enabled }}</useSecurity>
+{{- if .Values.jenkins.security.enabled }}
         <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy">
           <denyAnonymousReadAccess>true</denyAnonymousReadAccess>
         </authorizationStrategy>
-        <securityRealm class="org.jenkinsci.plugins.oic.OicSecurityRealm" plugin="oic-auth@1.0">
-          <clientId>fabric8-online-platform</clientId>
-          <clientSecret>${KEYCLOAK_CLIENT_SECRET}</clientSecret>
-          <tokenServerUrl>${KEYCLOAK_URL}/auth/realms/fabric8/protocol/openid-connect/token</tokenServerUrl>
-          <authorizationServerUrl>${KEYCLOAK_URL}/auth/realms/fabric8/protocol/openid-connect/auth</authorizationServerUrl>
-          <userNameField>email</userNameField>
-          <scopes>openid email</scopes>
-        </securityRealm>
+{{- else }}
+        <authorizationStrategy class="hudson.security.AuthorizationStrategy$Unsecured"/>
+{{- end }}
+{{- if .Values.jenkins.security.enabled }}
+{{ .Values.jenkins.security.realm | indent 8 }}
+{{- else }}
+        <securityRealm class="hudson.security.SecurityRealm$None"/>
+{{- end }}
         <disableRememberMe>false</disableRememberMe>
         <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
         <workspaceDir>${ITEM_ROOTDIR}/workspace</workspaceDir>
