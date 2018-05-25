@@ -1,7 +1,7 @@
 apiVersion: v1
 name: jenkins
 description: Jenkins chart that runs on kubernetes
-version: 1.0.3
+version: 1.0.5
 keywords:
   - jenkins
   - kubernetes

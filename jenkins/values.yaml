@@ -45,6 +45,7 @@ jenkins:
   service:
     ingressClass: internal-ingress
     forceSslRedirect: "true"
+    expose: "true"
   persistence:
     enabled: true
     volumeClaimName: jenkins-home
