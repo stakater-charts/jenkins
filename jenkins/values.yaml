@@ -44,7 +44,7 @@ jenkins:
       issuesAuth: ""
   service:
     ingressClass: internal-ingress
-    forceSslRedirect: true
+    forceSslRedirect: "true"
   persistence:
     enabled: true
     volumeClaimName: jenkins-home
