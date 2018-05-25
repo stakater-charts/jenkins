@@ -44,6 +44,7 @@ jenkins:
       issuesAuth: ""
   service:
     ingressClass: internal-ingress
+    forceSslRedirect: "true"
     expose: "true"
   persistence:
     enabled: true
