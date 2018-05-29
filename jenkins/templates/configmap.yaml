@@ -111,6 +111,7 @@ items:
         <approvedScriptHashes>
         </approvedScriptHashes>
         <approvedSignatures>
+          <string>staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods first java.lang.Object[]</string>
           <string>method hudson.tasks.test.AbstractTestResultAction getFailCount</string>
           <string>method hudson.tasks.test.AbstractTestResultAction getSkipCount</string>
           <string>method hudson.tasks.test.AbstractTestResultAction getTotalCount</string>
