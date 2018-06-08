@@ -24,6 +24,8 @@ jenkins:
           <scopes>openid email</scopes>
         </securityRealm>
   secrets:
+    helmKeys:      
+      stakater.asc: "your-public-pgp-key"
     git:
       sshKey: ""
       sshKeyPub: ""
@@ -60,3 +62,4 @@ jenkins:
   persistence:
     enabled: true
     volumeClaimName: jenkins-home
+    
