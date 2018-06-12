@@ -107,8 +107,6 @@ items:
             readOnly: false
           - mountPath: /usr/local/bin/configuration/
             name: jenkins-config
-          - mountPath: /usr/local/bin/pgp-configuration/
-            name: helm-pgpkey-config
         serviceAccountName: {{ template "name" . }}
         serviceAccount: {{ template "name" . }}
         volumes:
@@ -121,7 +119,4 @@ items:
         {{- end }}
         - configMap:
             name: {{ template "name" . }}        
-          name: jenkins-config        
-        - secret:
-            secretName: helm-pgp-key
-          name: helm-pgpkey-config
+          name: jenkins-config                
