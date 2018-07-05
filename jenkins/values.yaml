@@ -62,4 +62,7 @@ jenkins:
   persistence:
     enabled: true
     volumeClaimName: jenkins-home
-    
+  
+  forecastle: {}
+    # icon: https://cdn-images-1.medium.com/max/521/0*D__TQ7qMdoq3Y7kP.png
+    # expose: "true"

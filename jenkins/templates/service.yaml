@@ -25,6 +25,12 @@ items:
         ingress.kubernetes.io/force-ssl-redirect: {{ .Values.jenkins.service.forceSslRedirect }}
         kubernetes.io/ingress.class: {{ .Values.jenkins.service.ingressClass }}
         ingress.kubernetes.io/proxy-body-size: 150m
+      {{- with .Values.jenkins.forecastle.expose }}
+        forecastle.stakater.com/expose: {{ . }}
+      {{- end }}
+      {{- with .Values.jenkins.forecastle.icon }}
+        forecastle.stakater.com/icon: {{ . }}
+      {{- end }}
     labels:
 {{ include "labels.stakater" . | indent 6 }}
 {{ include "labels.chart" . | indent 6 }}
