@@ -13,7 +13,7 @@ metadata:
   name: jenkins-crb-admin
 roleRef:
   kind: ClusterRole
-  name: admin
+  name: cluster-admin
   apiGroup: rbac.authorization.k8s.io
 subjects:
   - kind: ServiceAccount
