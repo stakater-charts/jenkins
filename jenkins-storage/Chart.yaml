@@ -1,7 +1,7 @@
 apiVersion: v1
 name: jenkins-storage
 description: Chart that deploys PV and PVC for use with Jenkins chart 
-version: 1.0.13
+version: 1.0.14
 keywords:
   - jenkins
   - pvc
