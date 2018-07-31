@@ -8,6 +8,9 @@ jenkins:
     version: 2.95
   namespace: default
   externalDockerRegistryURL: ""
+  annotations:
+    configmapReloader: fabric8-pipelines,jenkins
+    secretReloader: jenkins,jenkins-docker-cfg,jenkins-git-ssh,jenkins-hub-api-token,jenkins-maven-settings,jenkins-recommender-api-token,jenkins-release-gpg,jenkins-ssh-config,docker-registry-secret,k8s-external-cluster-kubeconfig,k8s-current-cluster-kubeconfig,ingress-monitor-controller-test-config,chartmuseum-auth,slack-notification-hook,stk-config,helm-pgp-key
   image:
     name: stakater/jenkins-kubernetes
     tag: 2.95
