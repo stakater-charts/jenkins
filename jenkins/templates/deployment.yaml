@@ -5,6 +5,9 @@ items:
 - apiVersion: extensions/v1beta1
   kind: Deployment
   metadata:
+    annotations:
+      configmap.reloader.stakater.com/reload: {{ .Values.jenkins.annotations.configmapReloader }}
+      secret.reloader.stakater.com/reload: {{ .Values.jenkins.annotations.secretReloader }}
     labels:
 {{ include "labels.stakater" . | indent 6 }}
 {{ include "labels.chart" . | indent 6 }}
