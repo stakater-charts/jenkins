@@ -33,6 +33,7 @@ jenkins:
       sshKey: ""
       sshKeyPub: ""
       hubApiToken: ""
+      gitlabToken: ""
     maven:
       settings: ""
     gpg:
